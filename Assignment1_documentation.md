@@ -100,3 +100,4 @@ You only need to submit your revised `simple-execute.c`, which will be compiled 
 - Several new test cases will be utilized when grading. Test cases in `README.txt` are provided for validation.
 
 - TA WU, Shaofeng is responsible for this assignment. Questions about the assignment via Piazza are welcomed and preferred but you may also contact shaofeng via email: [wsf123@link.cuhk.edu.hk](mailto:wsf123@link.cuhk.edu.hk). Requests including but not limited to asking TA to set up environment, write code and debug for you will be rejected according to regulations.
+
