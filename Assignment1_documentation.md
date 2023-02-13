@@ -15,7 +15,12 @@ In assignment one, you will be guided to implement a simple shell program. Pleas
 
 ### 2.1. Target
 
-Implement a shell program that supports
+Suppose we have a directory structure shown below as an example:
+
+- dir1
+  - dir2
+
+Implement a shell program that supports:
 
 - one built-in command: `cd` command
 
@@ -26,7 +31,9 @@ Implement a shell program that supports
   user@OSLAB1:/dir1$
   ```
 
-- single non-built-in commands, i.e. `ls`, `ps`, etc. 
+  We only require you to support cd command **with one argument**, which is a path. We do not require you to support other scenarios such as cd with flags.
+
+- single external commands, i.e. `ls`, `ps`, etc. 
 
   Your shell program should be able to execute single command with arguments. For example:
 
@@ -47,17 +54,19 @@ Implement a shell program that supports
   user@OSLAB1:/dir1$
   ```
 
+​		Note: your program should be able to handle the case in which there is **there are at least one space(or tab, or both) before and one space(or tab, or both) after the pipe meta character “|”**. If there is no space before or after “|”, for example, for the following case:“ls|” is treated as **one argument** to be executed (rather than “ls” and “|”). Although in real bash shells, "ls|" will still be treated as command "ls" followed by pipe meta character, we do not require you to deal with such scenarios in assignment one. We are also aware of this when designing our grading test cases.
+
 Check `README.txt` in `assign1.zip` for more test cases.
 
 ### 2.2. Implementation Hints
 
-#### 2.2.1. Built-in commands & non-built-in commands
+#### 2.2.1. Built-in commands & external commands
 
-Built-in commands are contained within the shell itself, while other commands are supported by compiled binaries. One key difference between these two kinds of commands is that the shell will execute built-in commands in its main process and will fork a child process to execute non-built-in commands. 
+Built-in commands are contained within the shell itself, while other commands are supported by compiled binaries. One key difference between these two kinds of commands is that the shell will execute built-in commands in its main process and will fork a child process to execute external commands. 
 
-For example, linux shell supports the `cd` command to change current working directory, which is a built-in command and should be done in the main process of shell since changing directory in a child process will not affect the main process. Linux shell also supports the `ls` command, which is not a built-in command. When you type `ls` in the shell and enter, shell will invoke a child process and execute the corresponding binary in the child process if the binary is found under directories specified in environment variables. For `ls` command, the corresponding binary named `ls` is under `/bin` directory, which is usually a directory included in `PATH` variable so the shell can find where the binary of `ls` is. Forking child process to execute non-built-in commands can facilitate parallel execution of several commands of a shell.
+For example, linux shell supports the `cd` command to change current working directory, which is a built-in command and should be done in the main process of shell since changing directory in a child process will not affect the main process. Linux shell also supports the `ls` command, which is not a built-in command. When you type `ls` in the shell and enter, shell will invoke a child process and execute the corresponding binary in the child process if the binary is found under directories specified in environment variables. For `ls` command, the corresponding binary named `ls` is under `/bin` directory, which is usually a directory included in `PATH` variable so the shell can find where the binary of `ls` is. Forking child process to execute external commands can facilitate parallel execution of several commands of a shell.
 
-In this assignment one, your shell program is only required to support one built-in command, which is `cd`. You should take the behavior difference between built-in commands and non-built-in commands into consideration when finishing assignment one. 
+In this assignment one, your shell program is only required to support one built-in command, which is `cd`. You should take the behavior difference between built-in commands and external commands into consideration when finishing assignment one. 
 
 #### 2.2.2. Functions to use
 
@@ -91,4 +100,3 @@ You only need to submit your revised `simple-execute.c`, which will be compiled 
 - Several new test cases will be utilized when grading. Test cases in `README.txt` are provided for validation.
 
 - TA WU, Shaofeng is responsible for this assignment. Questions about the assignment via Piazza are welcomed and preferred but you may also contact shaofeng via email: [wsf123@link.cuhk.edu.hk](mailto:wsf123@link.cuhk.edu.hk). Requests including but not limited to asking TA to set up environment, write code and debug for you will be rejected according to regulations.
-
