@@ -57,7 +57,7 @@ Implement a shell program that supports:
 
 ​		Note: your program should be able to handle the case in which **there are at least one space(or tab, or both) before and one space(or tab, or both) after the pipe meta character “|”**. If there is no space before or after “|”, for example, for the following case:“ls|” is treated as **one argument** to be executed (rather than “ls” and “|”). Although in real bash shells, "ls|" will still be treated as command "ls" followed by pipe meta character, we do not require you to deal with such scenarios in assignment one. We are also aware of this when designing our grading test cases.
 
-Check `README.txt` in `assign1.zip` for more test cases.
+Check `src/README.md` for more test cases.
 
 ### 2.2. Implementation Hints
 
@@ -88,7 +88,7 @@ Please revise `simple-execute.c` to implement required functions of your shell p
 
 ## 3. Submission Content
 
-You only need to submit your revised `simple-execute.c`, which will be compiled with the same `Makefile` provided in `Assign1.zip` and tested with several test cases. Please make sure all your codes are resided in `simple-execute.c`. 
+You need to modify `simple-execute.c` to complete the shell program. In addition, please sign declaration of originality. 
 
 
 
