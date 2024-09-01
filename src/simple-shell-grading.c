@@ -18,7 +18,7 @@ int shell_execute(char **, int);
 #define TEST_CASE_NUM 13
 char *test_cases[TEST_CASE_NUM] = {
     "",
-    "cd ..",                                  /*1*/
+    "cd ../../../",                           /*1*/
     "ls",                                     /*2*/                                
     "ls -l",                                  /*3*/                           
     "ls -l | wc -l",                          /*4*/
