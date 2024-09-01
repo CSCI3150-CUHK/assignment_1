@@ -19,11 +19,10 @@ int shell_execute(char **, int);
 char *test_cases[TEST_CASE_NUM] = {
     "",
     "cd ../../../",                           /*1*/
-    "ls",                                     /*2*/                                
-    "ls -l",                                  /*3*/                           
-    "ls -l | wc -l",                          /*4*/
+    "ls",                                     /*2*/                                                        
+    "ls -l | wc -l",                          /*3*/
+    "cat a.txt | sort -k 2",                  /*4*/
     "ls -l | grep simple | wc -l",            /*5*/
-    "ls -l | grep simple | sort -k 9",        /*6*/
 };
 
 
