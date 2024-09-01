@@ -1,0 +1,7 @@
+Declaration
+I acknowledge the use of [AI tool or technology name] and [link] to generate.../ I have not used any AI tools or technologies to prepare this assessment.
+Prompt: I entered the following prompt/s...
+Use: I used the output to.../I modified the output to...
+
+Example
+I acknowledge the use of GPT-4o to generate part of the code (line10-30 of simple-execute.c) in this assignment.

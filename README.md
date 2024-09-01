@@ -91,8 +91,24 @@ Please revise `simple-execute.c` to implement required functions of your shell p
 You need to modify `simple-execute.c` to complete the shell program. In addition, please sign declaration of originality. 
 
 
+## 4. Generative AI Policy
+In assignment one, we allow usage of generative AI tools to help you with coding. We allow these tools because the key purpose of assignment one is to help you understand the following ideas
+- how to interact with Linux,
+- the design choices and rationale of shell,
+- what is the role of a shell in the context of the whole OS stack.
 
-## 4. Other Notes
+Below is the guideline of using AI tools in this assignment.
+- Allowed AI tools
+  - Any AI model, e.g. GPT-4o, that causes no ethical issues.
+- Acknowledgement
+  - Acknowledge your use of AI tools in `ai_declaration.txt`.
+- Limitations of AI tools (in the context of this assignment)
+  - AI may fail to properly use system calls.
+  - AI may have misunderstanding on some complex shell behaviors, e.g. three pipes.
+  - Using AI tools without properly understanding of the generated code can put you at risk in quizs/exams.
+
+
+## 5. Other Notes
 
 - We will compile, run and grade your program with Ubuntu latest, which is the same as the autograding environment. Please make sure your program sources are compatible with the corresponding version of Ubuntu. Otherwise, 0 marks will be given. 
 
