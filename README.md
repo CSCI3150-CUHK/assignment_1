@@ -4,10 +4,11 @@
 
 - Topic: implementation of a simple shell program in C
 - Total Marks: 100
-- Deadline: 18:00:00 p.m., Mon, Feb 13th
-- Submission: To be announced
-
-
+- Deadline: 18:00:00 p.m., Mon, Oct 7th
+- Submission: Github classroom
+- High-level aim:
+  - Understanding how to interact with Linux.
+  - Understanding the design choices and rationales of shell.
 
 ## 2. Task Instruction
 
@@ -54,7 +55,7 @@ Implement a shell program that supports:
   user@OSLAB1:/dir1$
   ```
 
-​		Note: your program should be able to handle the case in which there is **there are at least one space(or tab, or both) before and one space(or tab, or both) after the pipe meta character “|”**. If there is no space before or after “|”, for example, for the following case:“ls|” is treated as **one argument** to be executed (rather than “ls” and “|”). Although in real bash shells, "ls|" will still be treated as command "ls" followed by pipe meta character, we do not require you to deal with such scenarios in assignment one. We are also aware of this when designing our grading test cases.
+​		Note: your program should be able to handle the case in which **there are at least one space(or tab, or both) before and one space(or tab, or both) after the pipe meta character “|”**. If there is no space before or after “|”, for example, for the following case:“ls|” is treated as **one argument** to be executed (rather than “ls” and “|”). Although in real bash shells, "ls|" will still be treated as command "ls" followed by pipe meta character, we do not require you to deal with such scenarios in assignment one. We are also aware of this when designing our grading test cases.
 
 Check `README.txt` in `assign1.zip` for more test cases.
 
@@ -93,11 +94,11 @@ You only need to submit your revised `simple-execute.c`, which will be compiled 
 
 ## 4. Other Notes
 
-- We will compile, run and grade your program with Ubuntu 18.04.6 and gcc 7.5.0. Please make sure your program sources are compatible with the corresponding version of Ubuntu and gcc. Otherwise, 0 marks will be given.
+- We will compile, run and grade your program with Ubuntu latest, which is the same as the autograding environment. Please make sure your program sources are compatible with the corresponding version of Ubuntu. Otherwise, 0 marks will be given. 
 
-- Note that we can only grade what you submit in the submission method to be announced soon. Late submission will be graded based on the submission time and our late submission policy. Please find related policies on the [course website](https://github.com/henryhxu/CSCI3150).
+- Note that we can only grade what you submit in the github repo. You will lose write access to the github repo after deadline. Please find related policies on the [course website](https://github.com/henryhxu/CSCI3150).
 
-- Several new test cases will be utilized when grading. Test cases in `README.txt` are provided for validation.
+- Several new test cases will be utilized when grading. Test cases in `src/README.md` are provided for validation with autograding.
 
-- TA WU, Shaofeng is responsible for this assignment. Questions about the assignment via Piazza are welcomed and preferred but you may also contact shaofeng via email: [wsf123@link.cuhk.edu.hk](mailto:wsf123@link.cuhk.edu.hk). Requests including but not limited to asking TA to set up environment, write code and debug for you will be rejected according to regulations.
+- TA WU, Shaofeng is responsible for this assignment. Questions about the assignment via Piazza are welcomed. Due to massive class size, no individual email will be replied. Requests including but not limited to asking TA to set up environment, write code and debug for you will be rejected according to regulations.
 
