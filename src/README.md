@@ -28,10 +28,9 @@ For assignment one:
 ## How to test my program?
 At least, your shell program should be able to correctly execute and porduce the correct output for the following commands:
 ```shell
+cd ..
 ls
-ps
 ls -l
-ps -al
 ls -l | wc -l
 ls -l | grep simple | wc -l
 ls -l | grep simple | sort -k 9
