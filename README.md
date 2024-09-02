@@ -84,6 +84,8 @@ Note: other functions can also be utilized but we recommend using the above func
 
 Please revise `simple-execute.c` to implement required functions of your shell program. In `simple-execute.c`, we provided a general framework to help you better understand the code structure. You can fill in the code in the positions of `TODO`. However, you may also ignore this framework and implement in your own way. 
 
+**Note**: Please **DO NOT** modify any file other than `simple-execute.c`. Modification made to other files may cause unexpected results, e.g. disabling autograding of your project. We configured all files except for `simple-execute.c` as protected path, your modification to these files will be labeled as "Protected file(s) modified" in gh classroom, and will lead to possible grade loss.
+
 
 
 ## 3. Submission Content

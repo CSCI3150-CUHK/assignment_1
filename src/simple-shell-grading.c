@@ -15,15 +15,15 @@ int shell_read_line(char *);
 int get_line_args(char *, char **);
 int shell_execute(char **, int);
 
-#define TEST_CASE_NUM 13
-char *test_cases[TEST_CASE_NUM] = {
-    "",
-    "cd ../../../",                           /*1*/
-    "ls",                                     /*2*/                                                        
-    "ls -l | wc -l",                          /*3*/
-    "cat a.txt | sort -k 2",                  /*4*/
-    "ls -l | grep simple | wc -l",            /*5*/
-};
+// #define TEST_CASE_NUM 13
+// char *test_cases[TEST_CASE_NUM] = {
+//     "",
+//     "cd ../../../",                           /*1*/
+//     "ls",                                     /*2*/                                                        
+//     "ls -l | wc -l",                          /*3*/
+//     "cat a.txt | sort -k 2",                  /*4*/
+//     "ls -l | grep simple | wc -l",            /*5*/
+// };
 
 
 
@@ -34,44 +34,43 @@ int main(int argc_main, char *argv_main[])
   char dir_buf[MAX_DIR_LEN];
   int argc, char_num, status;
   int wait_return, wait_status;
+  int magic_flag = 0;
 
-  char log_prefix[256] = "./log/log";
-  strcat(log_prefix, argv_main[1]); 
-  //FILE *log_output = fopen("./log","w");
-  //int fd = open(log_prefix, O_RDWR | O_CREAT, 0666);
-
-  int test_case_counter = atoi(argv_main[1]);
-  /* go to grading directory */
-  if( test_case_counter == 1){
-    chdir("../../test_dir/test_subdir/");
-  }
-  else{
-    chdir("../../test_dir/");
+  // int test_case_counter = atoi(argv_main[1]);
+  // /* go to grading directory */
+  // if( test_case_counter == 1){
+  //   chdir("../../test_dir/test_subdir/");
+  // }
+  // else{
+  //   chdir("../../test_dir/");
+  // }
+  cmd_line = argv_main[1];
+  if(argc_main == 3){
+    magic_flag = atoi(argv_main[2]); /* indicating that the test case contains a change directory  */
   }
   
+  
 
-  /* redirect standout to log file */
-  /* redirect STDOUT_FILENO to WRITE_END */
-  //dup2(fd, STDOUT_FILENO);
+  // /* Intialize*/
+  // if ((cmd_line = malloc(MAX_LINE_SIZE)) == NULL) {
+  //   printf("malloc() error for cmd_line\n");
+  //   exit(-1);
+  // }
 
-  /* Intialize*/
-  if ((cmd_line = malloc(MAX_LINE_SIZE)) == NULL) {
-    printf("malloc() error for cmd_line\n");
-    exit(-1);
-  }
-
+  // Intialize command args
   if ((cmd_args = malloc(MAX_ARG_NUM * sizeof(char *))) == NULL) {
     printf("malloc() error for cmd_args\n");
     exit(-1);
   }
+  memset(cmd_args, 0 , MAX_ARG_NUM);
 
   
-    // Intialize command line & command args
-    memset(cmd_line, 0 , MAX_LINE_SIZE);
-    memset(cmd_args, 0 , MAX_ARG_NUM);
+  //   // Intialize command line & command args
+  //   memset(cmd_line, 0 , MAX_LINE_SIZE);
+  //   memset(cmd_args, 0 , MAX_ARG_NUM);
   
 
-    sprintf(cmd_line, test_cases[test_case_counter]);
+    // sprintf(cmd_line, test_cases[test_case_counter]);
     if( (argc = get_line_args(cmd_line, cmd_args)) <= 1){
       //"NULL" as the input or have error
       printf("Error: Not effective command.\n");
@@ -82,13 +81,12 @@ int main(int argc_main, char *argv_main[])
       exit(0);
       
     // for test case 1, need to check the current directory
-
-    if(test_case_counter == 1 || test_case_counter == 11){
+    if(magic_flag == 1){
       getcwd(dir_buf,128);
       printf("%s\n",dir_buf);
     }
       
-  free(cmd_args);
+  // free(cmd_args);
 
   return 0;
 }
