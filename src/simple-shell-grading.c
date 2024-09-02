@@ -15,17 +15,6 @@ int shell_read_line(char *);
 int get_line_args(char *, char **);
 int shell_execute(char **, int);
 
-// #define TEST_CASE_NUM 13
-// char *test_cases[TEST_CASE_NUM] = {
-//     "",
-//     "cd ../../../",                           /*1*/
-//     "ls",                                     /*2*/                                                        
-//     "ls -l | wc -l",                          /*3*/
-//     "cat a.txt | sort -k 2",                  /*4*/
-//     "ls -l | grep simple | wc -l",            /*5*/
-// };
-
-
 
 int main(int argc_main, char *argv_main[])
 {
@@ -35,28 +24,12 @@ int main(int argc_main, char *argv_main[])
   int argc, char_num, status;
   int wait_return, wait_status;
   int magic_flag = 0;
-
-  // int test_case_counter = atoi(argv_main[1]);
-  // /* go to grading directory */
-  // if( test_case_counter == 1){
-  //   chdir("../../test_dir/test_subdir/");
-  // }
-  // else{
-  //   chdir("../../test_dir/");
-  // }
+  
   cmd_line = argv_main[1];
   if(argc_main == 3){
     magic_flag = atoi(argv_main[2]); /* indicating that the test case contains a change directory  */
   }
   
-  
-
-  // /* Intialize*/
-  // if ((cmd_line = malloc(MAX_LINE_SIZE)) == NULL) {
-  //   printf("malloc() error for cmd_line\n");
-  //   exit(-1);
-  // }
-
   // Intialize command args
   if ((cmd_args = malloc(MAX_ARG_NUM * sizeof(char *))) == NULL) {
     printf("malloc() error for cmd_args\n");
@@ -64,29 +37,22 @@ int main(int argc_main, char *argv_main[])
   }
   memset(cmd_args, 0 , MAX_ARG_NUM);
 
-  
-  //   // Intialize command line & command args
-  //   memset(cmd_line, 0 , MAX_LINE_SIZE);
-  //   memset(cmd_args, 0 , MAX_ARG_NUM);
-  
 
-    // sprintf(cmd_line, test_cases[test_case_counter]);
-    if( (argc = get_line_args(cmd_line, cmd_args)) <= 1){
-      //"NULL" as the input or have error
-      printf("Error: Not effective command.\n");
-      exit(0);
-    }
-    if ( (status = shell_execute(cmd_args, argc)) < 0 )
-      //break;
-      exit(0);
+  if( (argc = get_line_args(cmd_line, cmd_args)) <= 1){
+    //"NULL" as the input or have error
+    printf("Error: Not effective command.\n");
+    exit(0);
+  }
+  if ( (status = shell_execute(cmd_args, argc)) < 0 )
+    //break;
+    exit(0);
+    
+  // for test case 1, need to check the current directory
+  if(magic_flag == 1){
+    getcwd(dir_buf,128);
+    printf("%s\n",dir_buf);
+  }
       
-    // for test case 1, need to check the current directory
-    if(magic_flag == 1){
-      getcwd(dir_buf,128);
-      printf("%s\n",dir_buf);
-    }
-      
-  // free(cmd_args);
 
   return 0;
 }
