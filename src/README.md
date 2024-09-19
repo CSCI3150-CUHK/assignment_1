@@ -8,16 +8,17 @@ The `src` directory contains an incomplete simple shell program. The following f
 
 ## How to compile?
 We provide a Makefile for quick compilation. To compile, input:
-
+```
 make
-
+```
 You can revise the Makefile to add your own compilation targets. However note that we will only use the original version of Makefile to compile your program when grading. 
 
 
 ## How to run?
-To run thr program after compilation, input:
+To run the program after compilation, input:
+```
 ./SimpleShell
-
+```
 
 ## What do I need to implement?
 For assignment one:

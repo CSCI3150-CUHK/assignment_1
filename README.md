@@ -18,8 +18,10 @@ In assignment one, you will be guided to implement a simple shell program. Pleas
 
 Suppose we have a directory structure shown below as an example:
 
-- dir1
-  - dir2
+```
+dir1/
+├─ dir2/
+```
 
 Implement a shell program that supports:
 
@@ -55,7 +57,13 @@ Implement a shell program that supports:
   user@OSLAB1:/dir1$
   ```
 
-​		Note: your program should be able to handle the case in which **there are at least one space(or tab, or both) before and one space(or tab, or both) after the pipe meta character “|”**. If there is no space before or after “|”, for example, for the following case:“ls|” is treated as **one argument** to be executed (rather than “ls” and “|”). Although in real bash shells, "ls|" will still be treated as command "ls" followed by pipe meta character, we do not require you to deal with such scenarios in assignment one. We are also aware of this when designing our grading test cases.
+#### 2.1.1. Additional notes
+
+1. Your program should be able to handle the case in which **there are at least one space (or tab, or both) before and one space (or tab, or both) after the pipe meta character “|”**. If there is no space before or after “|”, for example, for the following case: “ls|” is treated as **one argument** to be executed (rather than “ls” and “|”). Although in real bash shells, "ls|" will still be treated as command "ls" followed by pipe meta character, we do not require you to deal with such scenarios in assignment one. We are also aware of this when designing our grading test cases.
+
+2. For our grading test cases, all commands will be valid (i.e., incomplete/ incorrect commands such as `ls |` will not be tested).
+
+3. Different shells might have [different implementations](https://stackoverflow.com/questions/66882631/builtin-commands-in-a-shell-pipeline) for executing piped commands. For this assignment, we should follow and mimic the bash shell behaviour.
 
 Check `src/README.md` for more test cases.
 
