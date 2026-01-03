@@ -1,0 +1,201 @@
+name: Autograding Tests
+'on':
+- workflow_dispatch
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: compilation
+      id: compilation
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: compilation
+        setup-command: cd ./src; make SimpleShellGrading
+        command: cd ./test_dir; ../src/SimpleShellGrading ""
+        input: ''
+        expected-output: 'Error: Not effective command.'
+        comparison-method: exact
+        timeout: 1
+        max-score: 20
+    - name: builtin
+      id: builtin
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: builtin
+        setup-command: cd ./src; make SimpleShellGrading
+        command: cd ./test_dir; ../src/SimpleShellGrading "cd ../../../../" 1
+        input: ''
+        expected-output: "/home/runner"
+        comparison-method: exact
+        timeout: 1
+        max-score: 10
+    - name: external0
+      id: external0
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: external0
+        setup-command: cd ./src; make SimpleShellGrading
+        command: cd ./test_dir; ../src/SimpleShellGrading "ls -a"
+        input: ''
+        expected-output: |-
+          .
+          ..
+          cat_test.file
+          sort_test.file
+          test_subdir
+        comparison-method: exact
+        timeout: 1
+        max-score: 5
+    - name: external1
+      id: external1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: external1
+        setup-command: 'cd ./src; make SimpleShellGrading '
+        command: cd ./test_dir; ../src/SimpleShellGrading "find . -type d"
+        input: ''
+        expected-output: |-
+          .
+          ./test_subdir
+        comparison-method: exact
+        timeout: 1
+        max-score: 5
+    - name: external2
+      id: external2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: external2
+        setup-command: 'cd ./src; make SimpleShellGrading '
+        command: cd ./test_dir; ../src/SimpleShellGrading "grep -nrw test"
+        input: ''
+        expected-output: cat_test.file:1:This is a test file.
+        comparison-method: exact
+        timeout: 1
+        max-score: 5
+    - name: one_pipe0
+      id: one_pipe0
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: one_pipe0
+        setup-command: cd ./src; make SimpleShellGrading
+        command: cd ./test_dir; ../src/SimpleShellGrading "cat cat_test.file | wc
+          -l"
+        input: ''
+        expected-output: '3'
+        comparison-method: exact
+        timeout: 1
+        max-score: 10
+    - name: one_pipe1
+      id: one_pipe1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: one_pipe1
+        setup-command: cd ./src; make SimpleShellGrading
+        command: cd ./test_dir; ../src/SimpleShellGrading "ls -a | grep ".file""
+        input: ''
+        expected-output: |-
+          cat_test.file
+          sort_test.file
+        comparison-method: exact
+        timeout: 1
+        max-score: 10
+    - name: two_pipe0
+      id: two_pipe0
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: two_pipe0
+        setup-command: cd ./src; make SimpleShellGrading
+        command: cd ./test_dir; ../src/SimpleShellGrading "echo testecho | grep test
+          | uniq"
+        input: ''
+        expected-output: testecho
+        comparison-method: exact
+        timeout: 1
+        max-score: 10
+    - name: two_pipe1
+      id: two_pipe1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: two_pipe1
+        setup-command: cd ./src; make SimpleShellGrading
+        command: cd ./test_dir; ../src/SimpleShellGrading "cat sort_test.file | cut
+          -c 1-2 | sort -n"
+        input: ''
+        expected-output: |-
+          11
+          26
+          35
+          58
+        comparison-method: exact
+        timeout: 1
+        max-score: 10
+    - name: advance0
+      id: advance0
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: advance0
+        setup-command: cd ./src; make SimpleShellGrading
+        command: 'cd ./test_dir; ../src/SimpleShellGrading "cd .. | ls" '
+        input: ''
+        expected-output: |-
+          cat_test.file
+          sort_test.file
+          test_subdir
+        comparison-method: exact
+        timeout: 1
+        max-score: 5
+    - name: advance1
+      id: advance1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: advance1
+        setup-command: cd ./src; make SimpleShellGrading
+        command: cd ./test_dir; ../src/SimpleShellGrading "cd .. | cd .. | ls"
+        input: ''
+        expected-output: |-
+          cat_test.file
+          sort_test.file
+          test_subdir
+        comparison-method: exact
+        timeout: 1
+        max-score: 5
+    - name: advance2
+      id: advance2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: advance2
+        setup-command: cd ./src; make SimpleShellGrading
+        command: cd ./test_dir; ../src/SimpleShellGrading "ls | ls | ls"
+        input: ''
+        expected-output: |-
+          cat_test.file
+          sort_test.file
+          test_subdir
+        comparison-method: exact
+        timeout: 1
+        max-score: 5
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        COMPILATION_RESULTS: "${{steps.compilation.outputs.result}}"
+        BUILTIN_RESULTS: "${{steps.builtin.outputs.result}}"
+        EXTERNAL0_RESULTS: "${{steps.external0.outputs.result}}"
+        EXTERNAL1_RESULTS: "${{steps.external1.outputs.result}}"
+        EXTERNAL2_RESULTS: "${{steps.external2.outputs.result}}"
+        ONE_PIPE0_RESULTS: "${{steps.one_pipe0.outputs.result}}"
+        ONE_PIPE1_RESULTS: "${{steps.one_pipe1.outputs.result}}"
+        TWO_PIPE0_RESULTS: "${{steps.two_pipe0.outputs.result}}"
+        TWO_PIPE1_RESULTS: "${{steps.two_pipe1.outputs.result}}"
+        ADVANCE0_RESULTS: "${{steps.advance0.outputs.result}}"
+        ADVANCE1_RESULTS: "${{steps.advance1.outputs.result}}"
+        ADVANCE2_RESULTS: "${{steps.advance2.outputs.result}}"
+      with:
+        runners: compilation,builtin,external0,external1,external2,one_pipe0,one_pipe1,two_pipe0,two_pipe1,advance0,advance1,advance2
